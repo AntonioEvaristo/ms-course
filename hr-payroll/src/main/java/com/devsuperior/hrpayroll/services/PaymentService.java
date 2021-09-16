@@ -2,6 +2,7 @@ package com.devsuperior.hrpayroll.services;
 
 import com.devsuperior.hrpayroll.entities.Payment;
 import com.devsuperior.hrpayroll.entities.Worker;
+import com.devsuperior.hrpayroll.feignclients.WorkerFeignClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,17 +16,23 @@ import java.util.Map;
 @Slf4j
 public class PaymentService {
 
-    @Value("${hr-worker.host}")
-    private String workerHost;
+    //TODO usando restTemplate
+//    @Value("${hr-worker.host}")
+//    private String workerHost;
+
+//    @Autowired
+//    private RestTemplate restTemplate;
 
     @Autowired
-    private RestTemplate restTemplate;
+    private WorkerFeignClient workerFeignClient;
 
     public Payment getPayment(Long workerId, Integer days){
-        Map<String, String> uriVariables = new HashMap<>();
-        uriVariables.put("id",workerId.toString());
+//        Map<String, String> uriVariables = new HashMap<>();
+//        uriVariables.put("id",workerId.toString());
 
-        Worker worker = restTemplate.getForObject(workerHost + "/worker/{id}", Worker.class, uriVariables);
+      //  Worker worker = restTemplate.getForObject(workerHost + "/worker/{id}", Worker.class, uriVariables);
+
+        Worker worker = workerFeignClient.findById(workerId).getBody();
 
         log.info("Sucesso na comunicação com hr-worker, " + worker);
 
