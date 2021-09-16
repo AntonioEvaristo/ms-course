@@ -1,24 +1,23 @@
-package com.devsuperior.hrworker.entities;
-
+package com.devsuperior.hrpayroll.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "tb_worker")
-public class Worker implements Serializable {
+public class Payment implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     private String name;
+    private Integer days;
     private Double dailyIncome;
+
+
+    public Double getTotal(){
+        return this.days * this.dailyIncome;
+    }
 }
