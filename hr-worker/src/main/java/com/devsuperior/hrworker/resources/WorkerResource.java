@@ -21,8 +21,8 @@ import java.util.List;
 @RefreshScope
 public class WorkerResource {
 
-    @Value("${test.config}")
-    private String testConfig;
+//    @Value("${test.config}")
+//    private String testConfig;
 
     @Autowired
     private Environment environment;
@@ -36,11 +36,11 @@ public class WorkerResource {
         return ResponseEntity.ok(workers);
     }
 
-    @GetMapping("/configs")
-    public ResponseEntity<Void> getConfigs(){
-        log.info("CONFIG ="+testConfig);
-        return ResponseEntity.noContent().build();
-    }
+//    @GetMapping("/configs")
+//    public ResponseEntity<Void> getConfigs(){
+//        log.info("CONFIG ="+testConfig);
+//        return ResponseEntity.noContent().build();
+//    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Worker> findId(@PathVariable Long id){
